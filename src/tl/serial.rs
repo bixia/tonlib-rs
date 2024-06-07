@@ -75,6 +75,7 @@ mod tests {
             new_verbosity_level: 100500,
         };
         let cstr: CString = serialize_function_extra(&func, "some_extra").unwrap();
+        println!("{:?}", cstr);
         assert_eq!(
             "{\"@extra\":\"some_extra\",\"@type\":\"setLogVerbosityLevel\",\"new_verbosity_level\":100500}",
             cstr.to_str().unwrap())

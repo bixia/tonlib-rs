@@ -647,6 +647,7 @@ mod tests {
         let id_str =
             "33256211000003:b98dfa033a963f3bb9985f173ef2c6c9449be78a043ec1fc5965fe24a6d615a3";
         let tx_id: InternalTransactionId = id_str.parse()?;
+        println!("{:?}", tx_id);
         assert_eq!(tx_id.lt, 33256211000003);
         assert_eq!(
             tx_id.hash_string(),
@@ -661,6 +662,7 @@ mod tests {
     fn internal_transaction_id_parse_base64_works() -> anyhow::Result<()> {
         let id_str = "33256211000003:uY36AzqWPzu5mF8XPvLGyUSb54oEPsH8WWX+JKbWFaM=";
         let tx_id: InternalTransactionId = id_str.parse()?;
+        println!("{:?}", tx_id);
         assert_eq!(tx_id.lt, 33256211000003);
         assert_eq!(
             tx_id.hash_string(),

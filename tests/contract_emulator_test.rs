@@ -3,7 +3,8 @@ mod contract_emulator_tests {
     use tokio_test::assert_ok;
     use tonlib::address::TonAddress;
     use tonlib::contract::{
-        JettonData, JettonMasterContract, TonContractFactory, TonContractInterface,
+        JettonData, JettonMasterContract, TonContract, TonContractFactory, TonContractInterface,
+        TonContractState,
     };
     use tonlib::emulator::{TvmEmulator, TvmEmulatorC7Builder};
     use tonlib::meta::MetaDataContent;
@@ -79,9 +80,10 @@ mod contract_emulator_tests {
         let expected: TonAddress =
             assert_ok!("EQCGY3OVLtD9KRcOsP2ldQDtuY0FMzV7wPoxjrFbayBXc23c".parse());
 
-        let factory = assert_ok!(TonContractFactory::builder(&client).build().await);
-        let contract = factory.get_contract(&minter_address);
-        let state = assert_ok!(contract.get_state().await);
+        let factory: TonContractFactory =
+            assert_ok!(TonContractFactory::builder(&client).build().await);
+        let contract: TonContract = factory.get_contract(&minter_address);
+        let state: TonContractState = assert_ok!(contract.get_state().await);
 
         let stack = vec![assert_ok!(owner_address.try_into())];
         let method = "get_wallet_address";
